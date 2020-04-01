@@ -11,16 +11,35 @@ const getPrice = (setPrice) => {
 
 }
 
+const getActivity = (setActivity) => {
+  fetch('https://www.boredapi.com/api/activity')
+  .then(res => res.json())
+  .then((data) => {
+    setActivity(data.activity)
+  })
+  .catch(console.log)
+}
+
 function App() {
   const [price, setPrice] = useState(0)
+  const [activity, setActivity] = useState("Go Fishing")
 
   return (
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Bitcoin Price</h5>
-        <h6 class="card-subtitle mb-2 text-muted">steve@apple.com</h6>
-        <button onClick={() => getPrice(setPrice)}>Refresh Price</button>
-        <p class="card-text">${price}</p>
+    <div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Bitcoin Price</h5>
+          <button onClick={() => getPrice(setPrice)}>Refresh Price</button>
+          <p class="card-text">${price}</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Bored API</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Get an Idea for an Activity:</h6>
+          <button onClick={() => getActivity(setActivity)}>New Idea</button>
+          <p class="card-text">{activity}</p>
+        </div>
       </div>
     </div>
   )
